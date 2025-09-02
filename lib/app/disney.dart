@@ -1,3 +1,4 @@
+import 'package:disney/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,7 +15,7 @@ class Disney extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Disney',
-          theme: ThemeData(),
+          theme: getAppTheme(),
           home: child,
         );
       },
