@@ -1,3 +1,6 @@
+import 'package:disney/core/routes/app_routes.dart';
+import 'package:disney/core/routes/routes_constant.dart';
+import 'package:disney/core/strings/app_string.dart';
 import 'package:disney/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,12 +17,12 @@ class Disney extends StatelessWidget {
       builder: (_, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Disney',
+          title: AppString.appName,
           theme: getAppTheme(),
-          home: child,
+          onGenerateRoute: AppRoutes.getRoute,
+          initialRoute: RoutesConstant.splashScreen,
         );
       },
-      child: const Text('First Method'),
     );
   }
 }
