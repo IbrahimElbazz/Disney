@@ -1,3 +1,5 @@
+import 'package:disney/core/routes/route_extension.dart';
+import 'package:disney/core/routes/routes_constant.dart';
 import 'package:disney/core/strings/app_images.dart';
 import 'package:disney/core/strings/app_string.dart';
 import 'package:disney/core/themes/app_color.dart';
@@ -59,7 +61,9 @@ class OnBoardingScreen extends StatelessWidget {
             top: 650.h,
             right: 20.w,
             child: CustomElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(RoutesConstant.registerScreen);
+              },
               text: AppString.signUpNow,
             ),
           ),
@@ -87,7 +91,9 @@ class OnBoardingScreen extends StatelessWidget {
                 foregroundColor: AppColor.white,
                 padding: EdgeInsets.zero,
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(RoutesConstant.loginScreen);
+              },
               child: Text(
                 AppString.login,
                 style: TextStyle(

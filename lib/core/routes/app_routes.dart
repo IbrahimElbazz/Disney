@@ -1,5 +1,7 @@
 import 'package:disney/core/routes/routes_constant.dart';
 import 'package:disney/core/strings/app_string.dart';
+import 'package:disney/features/auth/login/presentation/screens/login_screen.dart';
+import 'package:disney/features/auth/register/presentation/screens/register_screen.dart';
 import 'package:disney/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:disney/features/splash/presentation/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +16,16 @@ class AppRoutes {
         return CupertinoPageRoute(
           // fullscreenDialog: true,
           builder: (context) => const OnBoardingScreen(),
+        );
+      case RoutesConstant.loginScreen:
+        return CupertinoPageRoute(
+          fullscreenDialog: true,
+          builder: (context) => const LoginScreen(),
+        );
+      case RoutesConstant.registerScreen:
+        return CupertinoPageRoute(
+          fullscreenDialog: true,
+          builder: (context) => const RegisterScreen(),
         );
       default:
         return CupertinoPageRoute(
