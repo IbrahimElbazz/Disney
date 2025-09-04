@@ -12,5 +12,10 @@ class AppString {
       'ou will use this email and password to log into\nyour accounts for all your favorite services across\nThe Walt Disney Family of Companies, including\nDisney+, Hulu and ESPN+.';
   static const String email = 'Email';
   static const String password = 'Password';
+  static const String confirmPassword = 'Confirm Password';
   static const String newToDisney = 'New to Disney ?';
+  static const String createNewAccount = 'Create New Account';
+  static const String iAgreeToAllTermsAndConditions =
+      'I agree to all terms and conditions';
+  static const String agreeAndContinue = 'Agree & Continue';
 }

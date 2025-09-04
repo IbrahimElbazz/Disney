@@ -9,15 +9,21 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText,
+    this.controller,
+    this.validator,
   });
   final String hint;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool? obscureText;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      validator: validator,
       obscureText: obscureText ?? false,
       cursorColor: AppColor.white50,
       decoration: InputDecoration(
