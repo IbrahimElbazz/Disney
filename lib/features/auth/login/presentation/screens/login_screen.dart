@@ -1,5 +1,6 @@
 import 'package:disney/core/routes/route_extension.dart';
 import 'package:disney/core/routes/routes_constant.dart';
+import 'package:disney/core/strings/app_images.dart';
 import 'package:disney/core/strings/app_string.dart';
 import 'package:disney/core/themes/app_color.dart';
 import 'package:disney/core/widgets/custom_button.dart';
@@ -65,7 +66,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 20.h),
-                CustomElevatedButton(onPressed: () {}, text: AppString.signIn),
+                CustomElevatedButton(
+                  onPressed: () {
+                    context.pushNamed(RoutesConstant.homeScreen);
+                  },
+                  text: AppString.signIn,
+                ),
 
                 Row(
                   children: [
@@ -83,6 +89,42 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 SizedBox(height: 20.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 20.w,
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      borderRadius: BorderRadius.circular(50.r),
+                      child: CircleAvatar(
+                        radius: 25.r,
+                        backgroundColor: AppColor.white20,
+                        child: Center(
+                          child: Image.asset(
+                            AppImages.google,
+                            width: 30.w,
+                            height: 30.h,
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      borderRadius: BorderRadius.circular(50.r),
+                      child: CircleAvatar(
+                        radius: 25.r,
+                        backgroundColor: AppColor.white20,
+                        child: Center(
+                          child: Image.asset(
+                            AppImages.apple,
+                            width: 30.w,
+                            height: 30.h,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
