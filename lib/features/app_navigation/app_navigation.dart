@@ -1,0 +1,74 @@
+import 'package:disney/core/themes/app_color.dart';
+import 'package:disney/features/home/presentation/screens/home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class AppNavigation extends StatefulWidget {
+  const AppNavigation({super.key});
+
+  @override
+  State<AppNavigation> createState() => _AppNavigationState();
+}
+
+class _AppNavigationState extends State<AppNavigation> {
+  int _selectedTab = 0;
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const HomeScreen(),
+    const HomeScreen(),
+    const HomeScreen(),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(toolbarHeight: 3.h),
+      extendBody: true,
+      body: _pages[_selectedTab],
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: CrystalNavigationBar(
+          currentIndex: _selectedTab,
+          unselectedItemColor: AppColor.white50,
+          backgroundColor: AppColor.blueDark.withValues(alpha: 0.4),
+          borderWidth: 1.w,
+          outlineBorderColor: AppColor.white,
+          onTap: (value) {
+            setState(() {
+              _selectedTab = value;
+            });
+          },
+          items: [
+            /// Home6
+            CrystalNavigationBarItem(
+              icon: Icons.home,
+              unselectedIcon: Icons.home,
+              selectedColor: AppColor.white,
+            ),
+
+            /// Favourite
+            CrystalNavigationBarItem(
+              icon: Icons.heart_broken_sharp,
+              unselectedIcon: Icons.heart_broken_sharp,
+              selectedColor: AppColor.red,
+            ),
+
+            /// Add
+            CrystalNavigationBarItem(
+              icon: Icons.place,
+              unselectedIcon: Icons.place,
+              selectedColor: AppColor.white,
+            ),
+
+            /// Search
+            CrystalNavigationBarItem(
+              icon: Icons.search,
+              unselectedIcon: Icons.search,
+              selectedColor: AppColor.white,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

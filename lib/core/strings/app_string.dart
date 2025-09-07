@@ -18,4 +18,7 @@ class AppString {
   static const String iAgreeToAllTermsAndConditions =
       'I agree to all terms and conditions';
   static const String agreeAndContinue = 'Agree & Continue';
+  static const String news = 'New';
+  static const String channels = 'Channels';
+  static const String showAll = 'Show All';
 }

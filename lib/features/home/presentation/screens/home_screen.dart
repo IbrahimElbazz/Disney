@@ -1,5 +1,10 @@
 import 'dart:async';
 import 'package:disney/core/strings/app_images.dart';
+import 'package:disney/core/strings/app_string.dart';
+import 'package:disney/core/themes/app_color.dart';
+import 'package:disney/features/home/presentation/widgets/anime_card.dart';
+import 'package:disney/features/home/presentation/widgets/channels_section.dart';
+import 'package:disney/features/home/presentation/widgets/top_anime_section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -16,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _showWelcomeDialog();
+    // _showWelcomeDialog();
   }
 
   // when success login
@@ -45,6 +50,65 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('home')));
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Image.asset(
+              AppImages.disneyLogo,
+              color: AppColor.white,
+              width: 100.w,
+            ),
+            TopAnimeSection(),
+            SizedBox(height: 18.h),
+            ChannelsSection(),
+            SizedBox(height: 18.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.news,
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    AppString.showAll,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.copyWith(color: AppColor.white50),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10.h),
+            SizedBox(
+              height: 310.h,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
+                itemCount: 5,
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.only(bottom: 20.h),
+                  child: Padding(
+                    padding: EdgeInsets.all(10.w),
+                    child: AnimeCard(
+                      name: 'Anime name',
+                      image: AppImages.testImage,
+                      time: '1.2 hr',
+                      rate: '8',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 100.h),
+          ],
+        ),
+      ),
+    );
   }
 }
