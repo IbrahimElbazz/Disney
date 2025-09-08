@@ -9,6 +9,7 @@ class AppColor {
   static const Color lightRed = Color(0xFFFF5656);
   static const Color red = Color(0xFFFF5656);
   static const Color move = Color.fromARGB(255, 133, 58, 232);
+  static const Color amber = Colors.amber;
 
   // white
   static const Color white = Color(0xffFFFFFF);

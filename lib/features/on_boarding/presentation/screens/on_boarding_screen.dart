@@ -62,9 +62,9 @@ class OnBoardingScreen extends StatelessWidget {
             right: 20.w,
             child: CustomElevatedButton(
               onPressed: () {
-                context.pushNamed(RoutesConstant.registerScreen);
+                context.pushNamed(RoutesConstant.loginScreen);
               },
-              text: AppString.signUpNow,
+              text: AppString.login,
             ),
           ),
           Positioned(
@@ -92,10 +92,10 @@ class OnBoardingScreen extends StatelessWidget {
                 padding: EdgeInsets.zero,
               ),
               onPressed: () {
-                context.pushNamed(RoutesConstant.loginScreen);
+                context.pushNamed(RoutesConstant.registerScreen);
               },
               child: Text(
-                AppString.login,
+                AppString.signUpNow,
                 style: TextStyle(
                   color: AppColor.white,
                   fontSize: AppFontSize.s18,

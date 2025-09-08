@@ -14,6 +14,7 @@ class AppImages {
   static String pixarChannel = '$imagePathImage/pixar_chanal.png';
   static String marvelChannel = '$imagePathImage/marvel_chanal.png';
   static String star = '$imagePathImage/star.png';
+  static String arrowDownward = '$imagePathImage/arrow_downward.png';
 }
 
 class AppLotties {
@@ -27,4 +28,5 @@ class AppLotties {
 
 class AppSvgs {
   static String playVid = '$imagePathImage/play_vid.svg';
+  static String arrowDownward = '$imagePathImage/arrow_downward.svg';
 }

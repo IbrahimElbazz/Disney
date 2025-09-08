@@ -21,4 +21,5 @@ class AppString {
   static const String news = 'New';
   static const String channels = 'Channels';
   static const String showAll = 'Show All';
+  static const String showMore = 'Show more';
 }

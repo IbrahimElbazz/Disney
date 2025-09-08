@@ -1,3 +1,4 @@
+import 'package:disney/core/routes/routes_constant.dart';
 import 'package:disney/core/strings/app_images.dart';
 import 'package:disney/core/widgets/custom_top_vid_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,9 +17,9 @@ class TopAnimeSection extends StatefulWidget {
 class _TopAnimeSectionState extends State<TopAnimeSection> {
   int page = 0;
   List<Widget> topCardsList = [
-    CustomTopVidCard(image: AppImages.testImage, onTap: () {}),
-    CustomTopVidCard(image: AppImages.testImage, onTap: () {}),
-    CustomTopVidCard(image: AppImages.testImage, onTap: () {}),
+    CustomTopVidCard(image: AppImages.testImage),
+    CustomTopVidCard(image: AppImages.testImage),
+    CustomTopVidCard(image: AppImages.testImage),
   ];
   @override
   Widget build(BuildContext context) {
