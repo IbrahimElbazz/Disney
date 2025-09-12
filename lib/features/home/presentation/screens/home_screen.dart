@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -63,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 100.w,
             ),
             TopAnimeSection(),
+
             SizedBox(height: 18.h),
             ChannelsSection(),
             SizedBox(height: 18.h),
@@ -86,26 +88,34 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 10.h),
             SizedBox(
-              height: 310.h,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                physics: BouncingScrollPhysics(),
-                itemCount: 5,
-                itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(bottom: 20.h),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.w),
-                    child: AnimeCard(
-                      name: 'Anime name',
-                      image: AppImages.testImage,
-                      time: '1.2 hr',
-                      rate: '8',
+                  height: 310.h,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: 5,
+                    itemBuilder: (context, index) => Padding(
+                      padding: EdgeInsets.only(bottom: 20.h),
+                      child: Padding(
+                        padding: EdgeInsets.all(10.w),
+                        child: AnimeCard(
+                          name: 'Anime name',
+                          image: AppImages.testImage,
+                          time: '1.2 hr',
+                          rate: '8',
+                        ),
+                      ),
                     ),
                   ),
+                )
+                .animate()
+                .fadeIn(curve: Curves.easeInOut, delay: 100.ms)
+                .slide(
+                  curve: Curves.easeInOut,
+                  delay: 100.ms,
+                  begin: const Offset(-0.5, 0.0),
+                  end: const Offset(0.0, 0.0),
                 ),
-              ),
-            ),
             SizedBox(height: 100.h),
           ],
         ),

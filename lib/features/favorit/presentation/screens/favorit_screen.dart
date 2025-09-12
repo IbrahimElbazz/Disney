@@ -3,6 +3,7 @@ import 'package:disney/core/themes/app_color.dart';
 import 'package:disney/core/themes/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class FavoritScreen extends StatelessWidget {
   const FavoritScreen({super.key});
@@ -12,20 +13,36 @@ class FavoritScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(bottom: 20.h),
-        child: GridView.builder(
-          physics: const BouncingScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.7,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          ),
-          padding: EdgeInsets.only(left: 10.w, right: 10.w, bottom: 100.h),
-          itemBuilder: (context, index) {
-            return FavoritItem(image: AppImages.testImage, title: 'Mulan');
-          },
-          itemCount: 10,
-        ),
+        child:
+            GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  padding: EdgeInsets.only(
+                    left: 10.w,
+                    right: 10.w,
+                    bottom: 100.h,
+                  ),
+                  itemBuilder: (context, index) {
+                    return FavoritItem(
+                      image: AppImages.testImage,
+                      title: 'Mulan',
+                    );
+                  },
+                  itemCount: 10,
+                )
+                .animate()
+                .fadeIn(curve: Curves.easeInOut, duration: 200.ms)
+                .slide(
+                  curve: Curves.easeInOut,
+                  delay: 100.ms,
+                  begin: const Offset(-0.5, 0.0),
+                  end: const Offset(0.0, 0.0),
+                ),
       ),
     );
   }

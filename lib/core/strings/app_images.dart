@@ -3,7 +3,7 @@ String imagePathLotties = 'assets/lotties';
 
 class AppImages {
   static String testImage =
-      'https://img.freepik.com/free-photo/anime-eyes-illustration_23-2151660487.jpg';
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyBnrlM0MtJaI4hvd-FtTznFX8h9o-Jn-3Ag&s';
   static String disneyLogo = '$imagePathImage/disney_logo.png';
   static String onBoarding = '$imagePathImage/on_boarding.png';
   static String google = '$imagePathImage/google.png';

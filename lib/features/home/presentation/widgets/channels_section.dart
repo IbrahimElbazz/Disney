@@ -4,6 +4,7 @@ import 'package:disney/features/home/presentation/widgets/card_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class ChannelsSection extends StatelessWidget {
   ChannelsSection({super.key});
@@ -25,20 +26,28 @@ class ChannelsSection extends StatelessWidget {
         ),
         SizedBox(height: 10.h),
         SizedBox(
-          height: 70.h,
-          child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            itemCount: _channels.length,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(right: 10.w),
-                child: CardImage(image: _channels[index]),
-              );
-            },
-          ),
-        ),
+              height: 70.h,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: _channels.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(right: 10.w),
+                    child: CardImage(image: _channels[index]),
+                  );
+                },
+              ),
+            )
+            .animate()
+            .fadeIn(curve: Curves.easeInOut, delay: 100.ms)
+            .slide(
+              curve: Curves.easeInOut,
+              delay: 100.ms,
+              begin: const Offset(-0.5, 0.0),
+              end: const Offset(0.0, 0.0),
+            ),
       ],
     );
   }
