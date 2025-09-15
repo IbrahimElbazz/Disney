@@ -1,6 +1,7 @@
 import 'package:disney/core/themes/app_color.dart';
 import 'package:disney/features/favorit/presentation/screens/favorit_screen.dart';
 import 'package:disney/features/home/presentation/screens/home_screen.dart';
+import 'package:disney/features/search/presentation/screens/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
@@ -19,7 +20,7 @@ class _AppNavigationState extends State<AppNavigation> {
     const HomeScreen(),
     const FavoritScreen(),
     const HomeScreen(),
-    const HomeScreen(),
+    const SearchScreen(),
   ];
   @override
   Widget build(BuildContext context) {

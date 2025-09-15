@@ -8,6 +8,7 @@ import 'package:disney/features/auth/register/presentation/screens/register_scre
 import 'package:disney/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:disney/features/splash/presentation/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:disney/features/search/presentation/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -42,6 +43,8 @@ class AppRoutes {
         );
       case RoutesConstant.playVidScreen:
         return CupertinoPageRoute(builder: (context) => PlayVidScreen());
+      case RoutesConstant.searchScreen:
+        return CupertinoPageRoute(builder: (context) => const SearchScreen());
       default:
         return CupertinoPageRoute(
           builder: (context) => const Scaffold(

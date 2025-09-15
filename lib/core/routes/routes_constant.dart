@@ -6,4 +6,5 @@ class RoutesConstant {
   static const String homeScreen = '/homeScreen';
   static const String animeDetailsScreen = '/animeDetailsScreen';
   static const String playVidScreen = '/playVidScreen';
+  static const String searchScreen = "/searchScreen";
 }
