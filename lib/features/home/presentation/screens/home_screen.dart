@@ -23,8 +23,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    getHomeData();
     super.initState();
+
     // _showWelcomeDialog();
+  }
+
+  getHomeData() async {
+    await context.read<HomeCubit>()
+      ..getHomeNews()
+      ..getTopAmine();
   }
 
   // when success login
