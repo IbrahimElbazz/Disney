@@ -38,6 +38,7 @@ class AnimeDetailsScreen extends StatelessWidget {
                   Row(children: [CustomLeading()]),
                   SizedBox(height: 370.h),
                   Text(
+                    textAlign: TextAlign.center,
                     animeData.title,
                     style: TextStyle(
                       color: AppColor.white,
@@ -90,7 +91,7 @@ class AnimeDetailsScreen extends StatelessWidget {
                       height: 90.h,
                     ),
                   ),
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 20.h),
                   Text(
                     AppString.showMore,
                     style: TextStyle(
@@ -105,7 +106,7 @@ class AnimeDetailsScreen extends StatelessWidget {
                     width: 20.w,
                     height: 20.h,
                   ),
-                  SizedBox(height: 20.h),
+                  // SizedBox(height: 20.h),
                 ],
               ),
             ),
