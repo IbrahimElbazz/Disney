@@ -57,8 +57,9 @@ class _SearchScreenState extends State<SearchScreen> {
       backgroundColor: AppColor.blueDark,
       appBar: AppBar(
         backgroundColor: AppColor.blueDark,
+        leadingWidth: 0,
         title: Container(
-          height: 40,
+          height: 50,
           decoration: BoxDecoration(
             color: AppColor.white10,
             borderRadius: BorderRadius.circular(8),
@@ -69,7 +70,10 @@ class _SearchScreenState extends State<SearchScreen> {
             cursorColor: AppColor.white,
             decoration: InputDecoration(
               hintText: 'Search movies, shows, and more...',
-              hintStyle: TextStyle(color: AppColor.white.withOpacity(0.7)),
+              hintStyle: TextStyle(
+                color: AppColor.white.withValues(alpha: 0.5),
+                fontSize: 18,
+              ),
               border: InputBorder.none,
               prefixIcon: const Icon(Icons.search, color: AppColor.white50),
               suffixIcon: _searchController.text.isNotEmpty
