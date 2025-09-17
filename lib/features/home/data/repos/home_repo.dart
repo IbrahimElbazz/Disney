@@ -16,4 +16,15 @@ class HomeRepo {
       return ApiResult.failure(ApiErrorHandler.handle(e.toString()));
     }
   }
+
+  // get news
+  Future<ApiResult<GetTopAnimeResponseModel>> getNewsHome() async {
+    try {
+      final response = await _apiService.getNewsHome();
+
+      return ApiResult.success(response);
+    } catch (e) {
+      return ApiResult.failure(ApiErrorHandler.handle(e.toString()));
+    }
+  }
 }

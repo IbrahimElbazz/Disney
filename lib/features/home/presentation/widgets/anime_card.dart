@@ -50,11 +50,15 @@ class AnimeCard extends StatelessWidget {
           SizedBox(height: 5.h),
           Row(
             children: [
-              Text(
-                name,
-                style: Theme.of(
-                  context,
-                ).textTheme.headlineMedium?.copyWith(color: AppColor.black),
+              Expanded(
+                child: Text(
+                  name,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: AppColor.black,
+                    fontSize: 16.sp,
+                  ),
+                ),
               ),
             ],
           ),

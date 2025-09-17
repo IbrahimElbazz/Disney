@@ -15,4 +15,12 @@ class HomeState with _$HomeState {
   ) = GetTopAnimeSuccess;
   const factory HomeState.getTopAnimeError(ApiErrorModel error) =
       GetTopAnimeError;
+
+  // get news home
+  const factory HomeState.getNewsHomeLoading() = GetNewsHomeLoading;
+  const factory HomeState.getNewsHomeSuccess(
+    GetTopAnimeResponseModel getTopAnimeResponseModel,
+  ) = GetNewsHomeSuccess;
+  const factory HomeState.getNewsHomeError(ApiErrorModel error) =
+      GetNewsHomeError;
 }

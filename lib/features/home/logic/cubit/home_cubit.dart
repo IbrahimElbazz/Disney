@@ -22,4 +22,18 @@ class HomeCubit extends Cubit<HomeState> {
       failure: (error) => emit(HomeState.getTopAnimeError(error)),
     );
   }
+
+  //  get home news
+  Future<void> getHomeNews() async {
+    emit(HomeState.getNewsHomeLoading());
+
+    final result = await _homeRepo.getNewsHome();
+    result.when(
+      success: (GetTopAnimeResponseModel data) {
+        emit(HomeState.getNewsHomeSuccess(data));
+      },
+
+      failure: (error) => emit(HomeState.getNewsHomeError(error)),
+    );
+  }
 }

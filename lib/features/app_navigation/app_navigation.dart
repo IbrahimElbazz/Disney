@@ -21,7 +21,9 @@ class _AppNavigationState extends State<AppNavigation> {
   int _selectedTab = 0;
   final List<Widget> _pages = [
     BlocProvider(
-      create: (context) => getIt<HomeCubit>()..getTopAmine(),
+      create: (context) => getIt<HomeCubit>()
+        ..getTopAmine()
+        ..getHomeNews(),
       child: const HomeScreen(),
     ),
     const FavoritScreen(),

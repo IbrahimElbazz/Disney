@@ -12,4 +12,8 @@ abstract class ApiService {
   // get top anime
   @GET(ApiConstants.topAnime)
   Future<GetTopAnimeResponseModel> getTopAnime();
+
+  // get news home
+  @GET(ApiConstants.newsHome)
+  Future<GetTopAnimeResponseModel> getNewsHome();
 }
