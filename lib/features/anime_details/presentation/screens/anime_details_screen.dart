@@ -5,13 +5,14 @@ import 'package:disney/core/strings/app_string.dart';
 import 'package:disney/core/themes/app_color.dart';
 import 'package:disney/core/widgets/custom_leading.dart';
 import 'package:disney/features/anime_details/presentation/widgets/anime_details_section.dart';
+import 'package:disney/features/home/data/models/get_top_anime_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:animated_rating_stars/animated_rating_stars.dart';
 
 class AnimeDetailsScreen extends StatelessWidget {
-  const AnimeDetailsScreen({super.key, required this.image});
-  final String image;
+  const AnimeDetailsScreen({super.key, required this.animeData});
+  final Anime animeData;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AnimeDetailsScreen extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(image),
+                image: NetworkImage(animeData.images.jpg.largeImageUrl ?? ""),
                 fit: BoxFit.fill,
                 opacity: 0.4,
               ),
@@ -35,27 +36,27 @@ class AnimeDetailsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Row(children: [CustomLeading()]),
-                  SizedBox(height: 350.h),
+                  SizedBox(height: 370.h),
                   Text(
-                    'Anime Name',
+                    animeData.title,
                     style: TextStyle(
                       color: AppColor.white,
-                      fontSize: 40.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    'Animation | 1h 57m',
-                    style: TextStyle(
-                      color: AppColor.white50,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: 5.h),
+                  Text(
+                    '${animeData.type} | ${animeData.duration}',
+                    style: TextStyle(
+                      color: AppColor.white50,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
                   AnimatedRatingStars(
-                    initialRating: 3.0,
+                    initialRating: animeData.score ?? 0.0,
                     minRating: 0.0,
                     maxRating: 5.0,
                     filledColor: AppColor.amber,
@@ -74,10 +75,13 @@ class AnimeDetailsScreen extends StatelessWidget {
                     animationCurve: Curves.easeInOut,
                     readOnly: true,
                   ),
-                  SizedBox(height: 50.h),
+                  SizedBox(height: 60.h),
                   InkWell(
                     onTap: () {
-                      context.pushNamed(RoutesConstant.playVidScreen);
+                      context.pushNamed(
+                        RoutesConstant.playVidScreen,
+                        arguments: animeData.trailer?.embedUrl,
+                      );
                     },
                     borderRadius: BorderRadius.circular(5555.r),
                     child: Image.asset(
@@ -95,7 +99,7 @@ class AnimeDetailsScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Image.asset(
                     AppImages.arrowDownward,
                     width: 20.w,
@@ -108,7 +112,7 @@ class AnimeDetailsScreen extends StatelessWidget {
           ),
 
           // Second Screen - Additional Details
-          AnimeDetailsSection(),
+          AnimeDetailsSection(animeData: animeData),
         ],
       ),
     );

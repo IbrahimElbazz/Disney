@@ -5,6 +5,7 @@ import 'package:disney/features/anime_details/presentation/screens/play_vid_scre
 import 'package:disney/features/app_navigation/app_navigation.dart';
 import 'package:disney/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:disney/features/auth/register/presentation/screens/register_screen.dart';
+import 'package:disney/features/home/data/models/get_top_anime_response_model.dart';
 import 'package:disney/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:disney/features/splash/presentation/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,10 +40,13 @@ class AppRoutes {
       case RoutesConstant.animeDetailsScreen:
         return CupertinoPageRoute(
           builder: (context) =>
-              AnimeDetailsScreen(image: routeSettings.arguments as String),
+              AnimeDetailsScreen(animeData: routeSettings.arguments as Anime),
         );
       case RoutesConstant.playVidScreen:
-        return CupertinoPageRoute(builder: (context) => PlayVidScreen());
+        return CupertinoPageRoute(
+          builder: (context) =>
+              PlayVidScreen(url: routeSettings.arguments as String),
+        );
       case RoutesConstant.searchScreen:
         return CupertinoPageRoute(builder: (context) => const SearchScreen());
       default:

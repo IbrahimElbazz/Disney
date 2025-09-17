@@ -1,74 +1,109 @@
+import 'package:disney/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:disney/features/home/data/models/get_top_anime_response_model.dart';
 
 class AnimeDetailsSection extends StatelessWidget {
-  const AnimeDetailsSection({super.key});
+  const AnimeDetailsSection({super.key, required this.animeData});
+  final Anime animeData;
 
   @override
   Widget build(BuildContext context) {
+    final genreChips = animeData.genres.map((genre) {
+      return Chip(
+        label: Text(genre.name),
+        backgroundColor: AppColor.primary,
+        labelStyle: const TextStyle(color: Colors.white),
+      );
+    }).toList();
+
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Synopsis Section
           Text(
             'Synopsis',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 24.sp,
+              fontSize: 22.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 10.h),
           Text(
-            'A young boy with a passion for adventure and a heart of gold, embarks on a journey to become the greatest hero of all time. Along the way, he meets a cast of colorful characters who help him on his quest.',
-            style: TextStyle(color: Colors.white70, fontSize: 16.sp),
+            "${animeData.synopsis?.substring(0, 500)} ...",
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 15.sp,
+              height: 1.5,
+            ),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 10.h),
+
+          // Genres Section
           Text(
-            'Cast',
+            'Genres',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 24.sp,
+              fontSize: 22.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 10.h),
-          _buildCastMember(context, 'Hero', 'Voice Actor 1'),
-          _buildCastMember(context, 'Sidekick', 'Voice Actor 2'),
-          _buildCastMember(context, 'Villain', 'Voice Actor 3'),
+          Wrap(spacing: 8.0, runSpacing: 4.0, children: genreChips),
+          SizedBox(height: 24.h),
+
+          // Other Details Section
+          Text(
+            'Details',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10.h),
+          _buildDetailRow('Status', animeData.status ?? 'N/A'),
+          _buildDetailRow('Episodes', animeData.episodes?.toString() ?? 'N/A'),
+          _buildDetailRow('Age Rating', animeData.rating ?? 'N/A'),
+          _buildDetailRow('Year', animeData.year?.toString() ?? 'N/A'),
+          _buildDetailRow('Score', animeData.score?.toString() ?? 'N/A'),
+          _buildDetailRow('Rank', '#${animeData.rank?.toString() ?? 'N/A'}'),
+          _buildDetailRow(
+            'Studios',
+            animeData.studios.map((s) => s.name).join(', '),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildCastMember(
-    BuildContext context,
-    String character,
-    String actor,
-  ) {
+  // Helper widget to build a detail row
+  Widget _buildDetailRow(String title, String value) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.h),
+      padding: EdgeInsets.symmetric(vertical: 6.h),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(radius: 30.r, backgroundColor: Colors.grey),
+          SizedBox(
+            width: 100.w,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           SizedBox(width: 10.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                character,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                actor,
-                style: TextStyle(color: Colors.white70, fontSize: 16.sp),
-              ),
-            ],
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(color: Colors.white70, fontSize: 16.sp),
+            ),
           ),
         ],
       ),
