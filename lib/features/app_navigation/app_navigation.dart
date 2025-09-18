@@ -3,6 +3,7 @@ import 'package:disney/core/themes/app_color.dart';
 import 'package:disney/features/favorit/presentation/screens/favorit_screen.dart';
 import 'package:disney/features/home/logic/cubit/home_cubit.dart';
 import 'package:disney/features/home/presentation/screens/home_screen.dart';
+import 'package:disney/features/my_account/presentation/screens/my_account_screen.dart';
 import 'package:disney/features/search/logic/cubit/search_cubit.dart';
 import 'package:disney/features/search/presentation/screens/search_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,11 +27,12 @@ class _AppNavigationState extends State<AppNavigation> {
       child: const HomeScreen(),
     ),
     const FavoritScreen(),
-    const FavoritScreen(),
+
     BlocProvider(
       create: (context) => getIt<SearchCubit>(),
       child: const SearchScreen(),
     ),
+    const MyAccountScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -66,17 +68,17 @@ class _AppNavigationState extends State<AppNavigation> {
               selectedColor: AppColor.red,
             ),
 
-            /// Add
-            CrystalNavigationBarItem(
-              icon: CupertinoIcons.add,
-              unselectedIcon: CupertinoIcons.add,
-              selectedColor: AppColor.white,
-            ),
-
             /// Search
             CrystalNavigationBarItem(
               icon: CupertinoIcons.search,
               unselectedIcon: CupertinoIcons.search,
+              selectedColor: AppColor.white,
+            ),
+
+            /// Account
+            CrystalNavigationBarItem(
+              icon: CupertinoIcons.person,
+              unselectedIcon: CupertinoIcons.person,
               selectedColor: AppColor.white,
             ),
           ],

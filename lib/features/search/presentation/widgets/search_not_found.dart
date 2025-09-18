@@ -17,7 +17,7 @@ class SearchNotFound extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          SizedBox(height: 60.h),
+          SizedBox(height: 130.h),
           Image.asset(
             AppImages.notFoundSearch,
             width: 200.w,

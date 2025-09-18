@@ -33,8 +33,8 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels >=
-          0.7 * _scrollController.position.maxScrollExtent) {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
         log('i here ');
         context.read<SearchCubit>().searchAnime(
           _searchController.text.trim(),
@@ -87,7 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 hintText: AppString.searchMoviesShowsAndMore,
                 hintStyle: TextStyle(
                   color: AppColor.white.withValues(alpha: 0.5),
-                  fontSize: 18.sp,
+                  fontSize: 16.sp,
                 ),
                 border: InputBorder.none,
                 prefixIcon: Icon(

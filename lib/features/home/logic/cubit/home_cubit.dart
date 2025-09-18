@@ -3,6 +3,7 @@ import 'package:disney/features/home/data/models/get_top_anime_response_model.da
 import 'package:disney/features/home/data/repos/home_repo.dart';
 import 'package:disney/features/home/logic/cubit/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(HomeState.initialhome());

@@ -14,7 +14,7 @@ class SearchEmpty extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       spacing: 20.h,
       children: [
-        SizedBox(height: 60.h),
+        SizedBox(height: 130.h),
         Center(child: Lottie.asset(AppLotties.search, width: 200.w)),
         Text(
           AppString.searchAnime,

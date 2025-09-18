@@ -39,4 +39,10 @@ class AppString {
   static const String score = 'Score';
   static const String rank = 'Rank';
   static const String studios = 'Studios';
+  static const String editProfile = 'Edit Profile';
+  static const String logout = 'Logout';
+  static const String help = 'Help';
+  static const String settings = 'Settings';
+
+  static const String language = 'Language';
 }
