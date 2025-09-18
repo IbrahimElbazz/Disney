@@ -28,4 +28,15 @@ class AppString {
       'Try searching for something else';
   static const String searchMoviesShowsAndMore =
       'Search movies, shows, and more...';
+  static const String synopsis = 'Synopsis';
+  static const String genres = 'Genres';
+  static const String details = 'Details';
+
+  static const String status = 'Status';
+  static const String episodes = 'Episodes';
+  static const String ageRating = 'Age Rating';
+  static const String year = 'Year';
+  static const String score = 'Score';
+  static const String rank = 'Rank';
+  static const String studios = 'Studios';
 }

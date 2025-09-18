@@ -1,3 +1,4 @@
+import 'package:disney/core/strings/app_string.dart';
 import 'package:disney/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,7 @@ class AnimeDetailsSection extends StatelessWidget {
           SizedBox(height: 20.h),
           // Synopsis Section
           Text(
-            'Synopsis',
+            AppString.synopsis,
             style: TextStyle(
               color: Colors.white,
               fontSize: 22.sp,
@@ -47,7 +48,7 @@ class AnimeDetailsSection extends StatelessWidget {
 
           // Genres Section
           Text(
-            'Genres',
+            AppString.genres,
             style: TextStyle(
               color: Colors.white,
               fontSize: 22.sp,
@@ -60,7 +61,7 @@ class AnimeDetailsSection extends StatelessWidget {
 
           // Other Details Section
           Text(
-            'Details',
+            AppString.details,
             style: TextStyle(
               color: Colors.white,
               fontSize: 22.sp,
@@ -68,14 +69,23 @@ class AnimeDetailsSection extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10.h),
-          _buildDetailRow('Status', animeData.status ?? 'N/A'),
-          _buildDetailRow('Episodes', animeData.episodes?.toString() ?? 'N/A'),
-          _buildDetailRow('Age Rating', animeData.rating ?? 'N/A'),
-          _buildDetailRow('Year', animeData.year?.toString() ?? 'N/A'),
-          _buildDetailRow('Score', animeData.score?.toString() ?? 'N/A'),
-          _buildDetailRow('Rank', '#${animeData.rank?.toString() ?? 'N/A'}'),
+          _buildDetailRow(AppString.status, animeData.status ?? 'N/A'),
           _buildDetailRow(
-            'Studios',
+            AppString.episodes,
+            animeData.episodes?.toString() ?? 'N/A',
+          ),
+          _buildDetailRow(AppString.ageRating, animeData.rating ?? 'N/A'),
+          _buildDetailRow(AppString.year, animeData.year?.toString() ?? 'N/A'),
+          _buildDetailRow(
+            AppString.score,
+            animeData.score?.toString() ?? 'N/A',
+          ),
+          _buildDetailRow(
+            AppString.rank,
+            '#${animeData.rank?.toString() ?? 'N/A'}',
+          ),
+          _buildDetailRow(
+            AppString.studios,
             animeData.studios.map((s) => s.name).join(', '),
           ),
         ],
