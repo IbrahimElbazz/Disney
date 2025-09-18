@@ -19,5 +19,8 @@ abstract class ApiService {
 
   // get anime search
   @GET(ApiConstants.animeSearch)
-  Future<GetTopAnimeResponseModel> searchAnime(@Query('q') String? query);
+  Future<GetTopAnimeResponseModel> searchAnime(
+    @Query('q') String? query,
+    @Query('page') int? page,
+  );
 }

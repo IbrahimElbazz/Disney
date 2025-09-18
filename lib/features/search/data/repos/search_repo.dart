@@ -8,9 +8,12 @@ class SearchRepo {
 
   SearchRepo(this._apiService);
 
-  Future<ApiResult<GetTopAnimeResponseModel>> searchAnime(String? query) async {
+  Future<ApiResult<GetTopAnimeResponseModel>> searchAnime(
+    String? query,
+    int? page,
+  ) async {
     try {
-      final response = await _apiService.searchAnime(query);
+      final response = await _apiService.searchAnime(query, page);
 
       return ApiResult.success(response);
     } catch (e) {

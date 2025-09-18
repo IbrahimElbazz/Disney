@@ -1,5 +1,5 @@
 import 'package:disney/core/network/api_result.dart';
-import 'package:disney/features/home/data/repos/home_repo.dart';
+import 'package:disney/features/home/data/models/get_top_anime_response_model.dart';
 import 'package:disney/features/search/data/repos/search_repo.dart';
 import 'package:disney/features/search/logic/cubit/search_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,11 +9,37 @@ class SearchCubit extends Cubit<SearchState> {
 
   final SearchRepo _searchRepo;
 
-  Future<void> searchAnime(String? query) async {
-    emit(SearchState.loadingSearch());
-    final response = await _searchRepo.searchAnime(query);
+  int page = 1;
+  bool max = false;
+  List<Anime> animeList = [];
+
+  Future<void> searchAnime(String? query, {required bool refreash}) async {
+    if (refreash) {
+      page = 1;
+      max = false;
+      animeList = [];
+      emit(SearchState.loadingSearch());
+    }
+    if (max) return;
+
+    final response = await _searchRepo.searchAnime(query, page);
     response.when(
-      success: (data) => emit(SearchState.successSearch(data)),
+      success: (data) {
+        if (data.data.isEmpty) {
+          max = true;
+        }
+
+        page++;
+        animeList.addAll(data.data);
+        emit(
+          SearchState.successSearch(
+            GetTopAnimeResponseModel(
+              data: animeList,
+              pagination: data.pagination,
+            ),
+          ),
+        );
+      },
       failure: (apiErrorModel) => emit(SearchState.errorSearch(apiErrorModel)),
     );
   }

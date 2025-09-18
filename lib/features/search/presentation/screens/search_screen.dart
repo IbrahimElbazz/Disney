@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:disney/core/routes/route_extension.dart';
 import 'package:disney/core/routes/routes_constant.dart';
 import 'package:disney/core/strings/app_string.dart';
@@ -21,17 +23,31 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _searchController.addListener(_onSearchChanged);
+    _searchController.addListener(() {
+      _onSearchChanged();
+    });
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          0.7 * _scrollController.position.maxScrollExtent) {
+        log('i here ');
+        context.read<SearchCubit>().searchAnime(
+          _searchController.text.trim(),
+          refreash: false,
+        );
+      }
+    });
   }
 
   void _onSearchChanged() {
     final query = _searchController.text.trim();
     if (query.isNotEmpty) {
-      context.read<SearchCubit>().searchAnime(query);
+      context.read<SearchCubit>().searchAnime(query, refreash: true);
     }
     setState(() {});
   }
@@ -40,6 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void dispose() {
     _searchController.removeListener(_onSearchChanged);
     _searchController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -53,6 +70,8 @@ class _SearchScreenState extends State<SearchScreen> {
           foregroundColor: AppColor.blueDark,
           surfaceTintColor: AppColor.blueDark,
           backgroundColor: AppColor.blueDark,
+
+          clipBehavior: Clip.none,
           leadingWidth: 0,
           title: Container(
             height: 50.h,
@@ -112,46 +131,66 @@ class _SearchScreenState extends State<SearchScreen> {
                       return data.data.isEmpty
                           ? SearchNotFound(searchController: _searchController)
                           : ListView.builder(
+                              controller: _scrollController,
                               physics: BouncingScrollPhysics(),
                               padding: const EdgeInsets.all(16.0),
-                              itemCount: data.data.length,
+                              itemCount:
+                                  data.data.length +
+                                  (context.read<SearchCubit>().max ? 0 : 1),
                               itemBuilder: (context, index) {
-                                return Card(
-                                  color: AppColor.white10,
-                                  margin: const EdgeInsets.only(bottom: 10),
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                        data
-                                            .data[index]
-                                            .images
-                                            .jpg
-                                            .largeImageUrl!,
-                                      ),
-                                    ),
-                                    title: Text(
-                                      'Movie $index',
-                                      style: const TextStyle(
-                                        color: AppColor.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      '${data.data[index].type}',
-                                      style: TextStyle(
-                                        color: AppColor.white.withValues(
-                                          alpha: 0.7,
+                                return index < data.data.length
+                                    ? Card(
+                                        color: AppColor.white10,
+                                        margin: const EdgeInsets.only(
+                                          bottom: 10,
                                         ),
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      context.pushNamed(
-                                        RoutesConstant.animeDetailsScreen,
-                                        arguments: data.data[index],
+                                        child: ListTile(
+                                          leading: CircleAvatar(
+                                            radius: 20.r,
+
+                                            backgroundImage: NetworkImage(
+                                              data
+                                                  .data[index]
+                                                  .images
+                                                  .jpg
+                                                  .largeImageUrl!,
+                                            ),
+                                          ),
+                                          title: Text(
+                                            data.data[index].title,
+                                            style: const TextStyle(
+                                              color: AppColor.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          trailing: const Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: AppColor.white80,
+                                          ),
+                                          subtitle: Text(
+                                            '${data.data[index].type}',
+                                            style: TextStyle(
+                                              color: AppColor.white.withValues(
+                                                alpha: 0.7,
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            context.pushNamed(
+                                              RoutesConstant.animeDetailsScreen,
+                                              arguments: data.data[index],
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: EdgeInsets.all(8.w),
+                                        child: Center(
+                                          child: CircularProgressIndicator(
+                                            color: AppColor.primary,
+                                          ),
+                                        ),
                                       );
-                                    },
-                                  ),
-                                );
                               },
                             );
                     },

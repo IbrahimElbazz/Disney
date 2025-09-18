@@ -9,6 +9,7 @@ ThemeData getAppTheme() {
     primaryColor: AppColor.primary,
     scaffoldBackgroundColor: AppColor.blueDark,
     appBarTheme: const AppBarTheme(
+      surfaceTintColor: AppColor.blueDark,
       backgroundColor: AppColor.blueDark,
       foregroundColor: AppColor.blueDark,
       elevation: 0,
