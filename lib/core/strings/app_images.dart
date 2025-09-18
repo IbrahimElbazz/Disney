@@ -15,6 +15,7 @@ class AppImages {
   static String marvelChannel = '$imagePathImage/marvel_chanal.png';
   static String star = '$imagePathImage/star.png';
   static String arrowDownward = '$imagePathImage/arrow_downward.png';
+  static String notFoundSearch = '$imagePathImage/not_found_search.png';
 }
 
 class AppLotties {
@@ -24,6 +25,7 @@ class AppLotties {
   static String fireworks2 = '$imagePathLotties/fireworks2.json';
   static String stars = '$imagePathLotties/stars.json';
   static String success = '$imagePathLotties/success.json';
+  static String search = '$imagePathLotties/search.json';
 }
 
 class AppSvgs {

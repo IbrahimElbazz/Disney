@@ -7,9 +7,9 @@ class HomeRepo {
   HomeRepo(this._apiService);
   ApiService _apiService;
 
-  Future<ApiResult<GetTopAnimeResponseModel>> getTopAnime() async {
+  Future<ApiResult<GetTopAnimeResponseModel>> getTopAnime(String? query) async {
     try {
-      final response = await _apiService.getTopAnime();
+      final response = await _apiService.getTopAnime(query);
 
       return ApiResult.success(response);
     } catch (e) {

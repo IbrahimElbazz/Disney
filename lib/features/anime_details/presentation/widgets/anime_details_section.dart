@@ -22,6 +22,7 @@ class AnimeDetailsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 20.h),
           // Synopsis Section
           Text(
             'Synopsis',
@@ -33,7 +34,9 @@ class AnimeDetailsSection extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           Text(
-            "${animeData.synopsis?.substring(0, 500)} ...",
+            animeData.synopsis!.length > 500
+                ? "${animeData.synopsis!.substring(0, 500)} ..."
+                : "${animeData.synopsis ?? 'N/A'} ...",
             style: TextStyle(
               color: Colors.white70,
               fontSize: 15.sp,

@@ -22,9 +22,10 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<GetTopAnimeResponseModel> getTopAnime() async {
+  Future<GetTopAnimeResponseModel> getTopAnime(String? query) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'q': query};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<GetTopAnimeResponseModel>(
@@ -59,6 +60,34 @@ class _ApiService implements ApiService {
           .compose(
             _dio.options,
             'seasons/now',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetTopAnimeResponseModel _value;
+    try {
+      _value = GetTopAnimeResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GetTopAnimeResponseModel> searchAnime(String? query) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'q': query};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<GetTopAnimeResponseModel>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'anime',
             queryParameters: queryParameters,
             data: _data,
           )

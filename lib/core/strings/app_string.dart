@@ -22,4 +22,10 @@ class AppString {
   static const String channels = 'Channels';
   static const String showAll = 'Show All';
   static const String showMore = 'Show more';
+  static const String searchAnime = 'Search Anime';
+  static const String noResultsFound = 'No results found for ';
+  static const String trySearchingForSomethingElse =
+      'Try searching for something else';
+  static const String searchMoviesShowsAndMore =
+      'Search movies, shows, and more...';
 }

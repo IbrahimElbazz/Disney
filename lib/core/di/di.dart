@@ -3,6 +3,8 @@ import 'package:disney/core/network/api_service.dart';
 import 'package:disney/core/network/dio_factory.dart';
 import 'package:disney/features/home/data/repos/home_repo.dart';
 import 'package:disney/features/home/logic/cubit/home_cubit.dart';
+import 'package:disney/features/search/data/repos/search_repo.dart';
+import 'package:disney/features/search/logic/cubit/search_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -15,4 +17,8 @@ void setupGetIt() {
   // home
   getIt.registerLazySingleton(() => HomeRepo(getIt()));
   getIt.registerFactory(() => HomeCubit(getIt()));
+
+  // search
+  getIt.registerLazySingleton(() => SearchRepo(getIt()));
+  getIt.registerFactory(() => SearchCubit(getIt()));
 }

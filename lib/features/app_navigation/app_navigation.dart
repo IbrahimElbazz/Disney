@@ -3,6 +3,7 @@ import 'package:disney/core/themes/app_color.dart';
 import 'package:disney/features/favorit/presentation/screens/favorit_screen.dart';
 import 'package:disney/features/home/logic/cubit/home_cubit.dart';
 import 'package:disney/features/home/presentation/screens/home_screen.dart';
+import 'package:disney/features/search/logic/cubit/search_cubit.dart';
 import 'package:disney/features/search/presentation/screens/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,10 @@ class _AppNavigationState extends State<AppNavigation> {
     ),
     const FavoritScreen(),
     const FavoritScreen(),
-    const SearchScreen(),
+    BlocProvider(
+      create: (context) => getIt<SearchCubit>(),
+      child: const SearchScreen(),
+    ),
   ];
   @override
   Widget build(BuildContext context) {

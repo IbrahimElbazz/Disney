@@ -1,5 +1,16 @@
+import 'package:disney/core/routes/route_extension.dart';
+import 'package:disney/core/routes/routes_constant.dart';
+import 'package:disney/core/strings/app_string.dart';
 import 'package:disney/core/themes/app_color.dart';
+import 'package:disney/features/search/logic/cubit/search_cubit.dart';
+import 'package:disney/features/search/logic/cubit/search_state.dart';
+import 'package:disney/features/search/presentation/widgets/loading_search_list.dart';
+import 'package:disney/features/search/presentation/widgets/search_empty.dart';
+import 'package:disney/features/search/presentation/widgets/search_not_found.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -10,25 +21,19 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  List<String> _recentSearches = ['Mickey Mouse', 'Frozen', 'The Lion King'];
-  List<String> _allMovies = [
-    'Mickey Mouse',
-    'Frozen',
-    'The Lion King',
-    'Moana',
-    'Toy Story',
-    'Finding Nemo',
-    'Aladdin',
-    'Beauty and the Beast',
-    'Cinderella',
-    'The Little Mermaid',
-  ];
-  List<String> _searchResults = [];
 
   @override
   void initState() {
     super.initState();
     _searchController.addListener(_onSearchChanged);
+  }
+
+  void _onSearchChanged() {
+    final query = _searchController.text.trim();
+    if (query.isNotEmpty) {
+      context.read<SearchCubit>().searchAnime(query);
+    }
+    setState(() {});
   }
 
   @override
@@ -38,169 +43,122 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
-  void _onSearchChanged() {
-    _searchResult();
-  }
-
-  void _searchResult() {
-    String query = _searchController.text.toLowerCase();
-    setState(() {
-      _searchResults = _allMovies
-          .where((movie) => movie.toLowerCase().contains(query))
-          .toList();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.blueDark,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
         backgroundColor: AppColor.blueDark,
-        leadingWidth: 0,
-        title: Container(
-          height: 50,
-          decoration: BoxDecoration(
-            color: AppColor.white10,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: TextField(
-            controller: _searchController,
-            style: const TextStyle(color: AppColor.white),
-            cursorColor: AppColor.white,
-            decoration: InputDecoration(
-              hintText: 'Search movies, shows, and more...',
-              hintStyle: TextStyle(
-                color: AppColor.white.withValues(alpha: 0.5),
-                fontSize: 18,
-              ),
-              border: InputBorder.none,
-              prefixIcon: const Icon(Icons.search, color: AppColor.white50),
-              suffixIcon: _searchController.text.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear, color: AppColor.white50),
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() {});
-                      },
-                    )
-                  : null,
-              contentPadding: const EdgeInsets.symmetric(vertical: 8),
+        appBar: AppBar(
+          foregroundColor: AppColor.blueDark,
+          surfaceTintColor: AppColor.blueDark,
+          backgroundColor: AppColor.blueDark,
+          leadingWidth: 0,
+          title: Container(
+            height: 50.h,
+            decoration: BoxDecoration(
+              color: AppColor.white10,
+              borderRadius: BorderRadius.circular(8.r),
             ),
-            onChanged: (value) {
-              // _onSearchChanged will handle setState
-            },
+            child: TextField(
+              controller: _searchController,
+              style: const TextStyle(color: AppColor.white),
+              cursorColor: AppColor.white,
+              decoration: InputDecoration(
+                hintText: AppString.searchMoviesShowsAndMore,
+                hintStyle: TextStyle(
+                  color: AppColor.white.withValues(alpha: 0.5),
+                  fontSize: 18.sp,
+                ),
+                border: InputBorder.none,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: AppColor.white50,
+                  size: 20.sp,
+                ),
+                suffixIcon: _searchController.text.isNotEmpty
+                    ? IconButton(
+                        icon: Icon(
+                          Icons.clear,
+                          color: AppColor.white50,
+                          size: 20.sp,
+                        ),
+                        onPressed: () {
+                          _searchController.clear();
+                          setState(() {});
+                        },
+                      )
+                    : null,
+                contentPadding: EdgeInsets.symmetric(vertical: 8.h),
+              ),
+              onChanged: (_) => _onSearchChanged(),
+            ),
           ),
         ),
-      ),
-      body: _searchController.text.isEmpty
-          ? Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Recent Searches',
-                    style: TextStyle(
-                      color: AppColor.white.withOpacity(0.8),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: _recentSearches.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: const Icon(
-                            Icons.history,
-                            color: AppColor.white50,
-                          ),
-                          title: Text(
-                            _recentSearches[index],
-                            style: const TextStyle(color: AppColor.white),
-                          ),
-                          trailing: IconButton(
-                            icon: const Icon(
-                              Icons.close,
-                              color: AppColor.white50,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _recentSearches.removeAt(index);
-                              });
-                            },
-                          ),
-                          onTap: () {
-                            _searchController.text = _recentSearches[index];
-                            _searchResult(); // Trigger search for the recent item
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : _searchResults.isEmpty && _searchController.text.isNotEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.search_off,
-                    color: AppColor.white.withOpacity(0.5),
-                    size: 80,
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'No results found for "${_searchController.text}"',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColor.white.withOpacity(0.7),
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    'Try searching for something else',
-                    style: TextStyle(
-                      color: AppColor.white.withOpacity(0.5),
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : ListView.builder(
-              padding: const EdgeInsets.all(16.0),
-              itemCount: _searchResults.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: AppColor.white10,
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: ListTile(
-                    leading: const Icon(Icons.movie, color: AppColor.white),
-                    title: Text(
-                      _searchResults[index],
-                      style: const TextStyle(
-                        color: AppColor.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      'A wonderful movie from Disney',
-                      style: TextStyle(color: AppColor.white.withOpacity(0.7)),
-                    ),
-                    onTap: () {
-                      // Handle tapping on a search result
-                      print('Tapped on ${_searchResults[index]}');
+        body: _searchController.text.isEmpty
+            ? const SearchEmpty()
+            : BlocBuilder<SearchCubit, SearchState>(
+                buildWhen: (previous, current) {
+                  return current is ErrorSearch ||
+                      current is LoadingSearch ||
+                      current is SuccessSearch;
+                },
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    orElse: () => const SizedBox.shrink(),
+                    loadingSearch: () => LoadingSearchList(),
+                    errorSearch: (error) => Center(child: Text(error.message)),
+                    successSearch: (data) {
+                      return data.data.isEmpty
+                          ? SearchNotFound(searchController: _searchController)
+                          : ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              padding: const EdgeInsets.all(16.0),
+                              itemCount: data.data.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  color: AppColor.white10,
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  child: ListTile(
+                                    leading: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                        data
+                                            .data[index]
+                                            .images
+                                            .jpg
+                                            .largeImageUrl!,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      'Movie $index',
+                                      style: const TextStyle(
+                                        color: AppColor.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                      '${data.data[index].type}',
+                                      style: TextStyle(
+                                        color: AppColor.white.withValues(
+                                          alpha: 0.7,
+                                        ),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      context.pushNamed(
+                                        RoutesConstant.animeDetailsScreen,
+                                        arguments: data.data[index],
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            );
                     },
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              ),
+      ),
     );
   }
 }
