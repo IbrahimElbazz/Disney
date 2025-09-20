@@ -1,7 +1,7 @@
 # Disney+ Clone App
 
 <p align="center">
-  <img src="assets/Disney.jpg" alt="app" width="300"/>
+  <img src="assets/Disney.jpg" alt="app" width="600"/>
 </p>
 
 A feature-rich Disney+ clone application built with Flutter. This project showcases a modern, feature-driven architecture, a clean UI, and a robust technology stack to deliver a seamless user experience for browsing and discovering movie and anime content.
@@ -52,4 +52,9 @@ Follow these instructions to get a copy of the project up and running on your lo
 -   Flutter SDK (version 3.8.1 or higher)
 -   Dart SDK
 -   An IDE like Android Studio or VS Code
+
+### vid :
+
+
+https://github.com/user-attachments/assets/f8f79e1d-7887-42c6-a8d4-0488c6d3024a
 
