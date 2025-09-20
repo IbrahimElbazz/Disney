@@ -1,4 +1,4 @@
-# Disney+ Clone App
+# Disney App
 
 <p align="center">
   <img src="assets/Disney.jpg" alt="app" width="600"/>
