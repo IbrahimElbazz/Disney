@@ -68,20 +68,20 @@ class _TopAnimeSectionState extends State<TopAnimeSection> {
                         "",
                   ),
                   CustomTopVidCard(
-                    animeData: getTopAnimeResponseModel.data[4],
+                    animeData: getTopAnimeResponseModel.data[3],
                     image:
                         getTopAnimeResponseModel
-                            .data[4]
+                            .data[3]
                             .images
                             .jpg
                             .largeImageUrl ??
                         "",
                   ),
                   CustomTopVidCard(
-                    animeData: getTopAnimeResponseModel.data[5],
+                    animeData: getTopAnimeResponseModel.data[4],
                     image:
                         getTopAnimeResponseModel
-                            .data[5]
+                            .data[4]
                             .images
                             .jpg
                             .largeImageUrl ??

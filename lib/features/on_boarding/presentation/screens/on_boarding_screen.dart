@@ -85,7 +85,7 @@ class OnBoardingScreen extends StatelessWidget {
           ),
           Positioned(
             top: 775.h,
-            left: 165.w,
+            left: 148.w,
             child: TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: AppColor.white,

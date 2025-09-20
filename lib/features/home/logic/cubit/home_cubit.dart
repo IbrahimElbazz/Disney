@@ -14,7 +14,7 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getTopAmine() async {
     emit(HomeState.getTopAnimeLoading());
 
-    final response = await _homeRepo.getTopAnime(null);
+    final response = await _homeRepo.getTopAnime();
     response.when(
       success: (GetTopAnimeResponseModel data) {
         emit(HomeState.getTopAnimeSuccess(data));

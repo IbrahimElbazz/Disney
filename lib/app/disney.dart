@@ -14,6 +14,7 @@ class Disney extends StatelessWidget {
       designSize: const Size(393, 852),
       minTextAdapt: true,
       splitScreenMode: true,
+      useInheritedMediaQuery: true,
       builder: (_, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
