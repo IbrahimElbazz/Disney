@@ -1,7 +1,7 @@
 # Disney+ Clone App
 
 <p align="center">
-  <img src="assets/Disney.jpg" alt="app" width="150"/>
+  <img src="assets/Disney.jpg" alt="app" width="300"/>
 </p>
 
 A feature-rich Disney+ clone application built with Flutter. This project showcases a modern, feature-driven architecture, a clean UI, and a robust technology stack to deliver a seamless user experience for browsing and discovering movie and anime content.
